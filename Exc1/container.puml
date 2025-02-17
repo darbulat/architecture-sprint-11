@@ -1,0 +1,32 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(admin, "Администратор")
+Person(doctor, "Врач")
+Person(finance, "Финансовый аналитик")
+
+System_Boundary(c1, "Система Будущее 2.0") {
+    Container(web_portal, "Портал самообслуживания", "Web-приложение", "Предоставляет интерфейс для создания отчетов и аналитики")
+    Container(dwh, "DWH", "Хранилище данных", "Microsoft SQL Server", "Хранение и обработка данных")
+    Container(ai_services, "ИИ-сервисы", "Микросервисы", "Python", "Обработка медицинских данных")
+    Container(fintech_services, "Финтех-сервисы", "Микросервисы", "Golang, Java", "Обработка финансовых данных")
+    Container(integration_bus, "Интеграционная шина", "Apache Camel", "Обеспечивает взаимодействие между сервисами")
+    Container(bi_system, "BI-система", "Power BI", "Аналитика и визуализация данных")
+}
+
+Rel(admin, web_portal, "Использует для создания отчетов")
+Rel(doctor, web_portal, "Использует для анализа медицинских данных")
+Rel(finance, web_portal, "Использует для финансовой аналитики")
+
+Rel(web_portal, dwh, "Запрашивает данные")
+Rel(web_portal, ai_services, "Запрашивает аналитику")
+Rel(web_portal, fintech_services, "Запрашивает финансовые данные")
+Rel(web_portal, bi_system, "Экспортирует данные для визуализации")
+
+Rel(dwh, ai_services, "Предоставляет медицинские данные")
+Rel(dwh, fintech_services, "Предоставляет финансовые данные")
+Rel(dwh, integration_bus, "Синхронизирует данные")
+Rel(integration_bus, ai_services, "Передает данные для обработки")
+Rel(integration_bus, fintech_services, "Передает данные для обработки")
+
+@enduml

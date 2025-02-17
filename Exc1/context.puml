@@ -1,0 +1,33 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container(web_portal, "Портал самообслуживания", "Web-приложение") {
+    Component(report_builder, "Конструктор отчетов", "Позволяет создавать пользовательские отчеты")
+    Component(data_access, "Доступ к данным", "Обеспечивает доступ к данным из DWH и сервисов")
+    Component(user_management, "Управление пользователями", "Управление доступом и ролями")
+}
+
+Container(dwh, "DWH", "Microsoft SQL Server") {
+    Component(customer_data, "Данные клиентов", "Хранение данных о клиентах")
+    Component(medical_data, "Медицинские данные", "Хранение медицинских карт и историй болезни")
+    Component(financial_data, "Финансовые данные", "Хранение финансовой информации")
+}
+
+Container(ai_services, "ИИ-сервисы", "Python") {
+    Component(data_processing, "Обработка данных", "Анализ медицинских данных")
+    Component(prediction_engine, "Прогнозирование", "Прогнозирование результатов лечения")
+}
+
+Container(fintech_services, "Финтех-сервисы", "Golang, Java") {
+    Component(transaction_processing, "Обработка транзакций", "Обработка финансовых транзакций")
+    Component(credit_management, "Управление кредитами", "Управление кредитными данными")
+}
+
+Rel(report_builder, data_access, "Использует")
+Rel(data_access, customer_data, "Запрашивает данные")
+Rel(data_access, medical_data, "Запрашивает данные")
+Rel(data_access, financial_data, "Запрашивает данные")
+Rel(data_access, data_processing, "Запрашивает аналитику")
+Rel(data_access, transaction_processing, "Запрашивает финансовые данные")
+
+@enduml
