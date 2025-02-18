@@ -18,10 +18,10 @@ Rel(admin, web_portal, "Использует для создания отчет�
 Rel(doctor, web_portal, "Использует для анализа медицинских данных")
 Rel(finance, web_portal, "Использует для финансовой аналитики")
 
-Rel(web_portal, dwh, "Запрашивает данные")
-Rel(web_portal, ai_services, "Запрашивает аналитику")
-Rel(web_portal, fintech_services, "Запрашивает финансовые данные")
-Rel(web_portal, bi_system, "Экспортирует данные для визуализации")
+Rel(web_portal, bi_system, "Запрашивает отчеты и аналитику")
+Rel(bi_system, dwh, "Запрашивает данные для аналитики")
+Rel(bi_system, ai_services, "Запрашивает медицинскую аналитику")
+Rel(bi_system, fintech_services, "Запрашивает финансовую аналитику")
 
 Rel(dwh, ai_services, "Предоставляет медицинские данные")
 Rel(dwh, fintech_services, "Предоставляет финансовые данные")
